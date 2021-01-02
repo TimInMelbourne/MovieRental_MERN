@@ -1,8 +1,5 @@
-const { valid } = require('joi');
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const express = require('express');
-const app = express();
 
 const Customer = mongoose.model(
   'Customer',
@@ -38,10 +35,6 @@ function validateCustomer(customer) {
     customerIsGold: customer.isGold,
   });
 }
-
-app.get('/', (req, res) => {
-  console.log('customer requested.');
-});
 
 exports.Customer = Customer;
 exports.validateCustomer = validateCustomer;
