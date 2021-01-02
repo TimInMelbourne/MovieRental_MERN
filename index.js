@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
 const genres = require('./routes/genres');
+const customer = require('./routes/customers');
 
 const mongoose = require('mongoose');//load mongoose
 
 app.use(express.json());
 app.use('/api/genres', genres); //load the genres router
+app.use('/api/customers', customer);
 
 //Connect to local mongoDB server
 mongoose.connect('mongodb://localhost/MovieRental', { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false })
@@ -20,6 +22,7 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
     res.send('Hello, why not go to /api/genres?');
 })
+
 
 app.listen('3000', () => console.log('Listening on port 3000'));
 
