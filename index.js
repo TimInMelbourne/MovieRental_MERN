@@ -2,27 +2,31 @@ const express = require('express');
 const app = express();
 const genres = require('./routes/genres');
 const customer = require('./routes/customers');
-
-const mongoose = require('mongoose');//load mongoose
+const movies = require('./routes/movies');
+const rentals = require('./routes/rentals');
+const users = require('./routes/users');
+const mongoose = require('mongoose'); //load mongoose
 
 app.use(express.json());
 app.use('/api/genres', genres); //load the genres router
 app.use('/api/customers', customer);
+app.use('/api/movies', movies);
+app.use('/api/rentals', rentals);
+app.use('/api/users', users);
 
 //Connect to local mongoDB server
-mongoose.connect('mongodb://localhost/MovieRental', { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log('Could not connect to MongoDB', err.message));
+mongoose
+  .connect('mongodb://localhost/MovieRental', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.log('Could not connect to MongoDB', err.message));
 
 app.get('/', (req, res) => {
-    res.send('Hello, why not go to /api/genres?');
+  res.send('movies, genres, customers, rentals and users are built and tested');
 });
 
-
-app.get('/api', (req, res) => {
-    res.send('Hello, why not go to /api/genres?');
-})
-
-
 app.listen('3000', () => console.log('Listening on port 3000'));
-

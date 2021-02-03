@@ -62,14 +62,14 @@ function validateRental(rental) {
   const schema = Joi.object({
     customer: Joi.object({
       _id: Joi.string().required(),
-      name: Joi.string().required(),
-      isGold: Joi.boolean().required(),
-      phone: Joi.string().required(),
+      name: Joi.string(),
+      isGold: Joi.boolean(),
+      phone: Joi.string(),
     }),
     movie: Joi.object({
       _id: Joi.string().required(),
-      title: Joi.string().required(),
-      dailyRentalRate: Joi.number().required(),
+      title: Joi.string(),
+      dailyRentalRate: Joi.number(),
     }),
   });
 
@@ -77,4 +77,4 @@ function validateRental(rental) {
 }
 
 exports.Rental = Rental;
-exports.validate = validateRental;
+exports.validateRental = validateRental;
