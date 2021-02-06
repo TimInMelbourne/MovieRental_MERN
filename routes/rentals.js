@@ -1,5 +1,8 @@
+const auth = require('../middleware/auth');
 const { Rental, validateRental } = require('../models/rental');
 const { Movie } = require('../models/movie');
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 const { Customer } = require('../models/customer');
 const mongoose = require('mongoose');
 const express = require('express');
@@ -10,7 +13,16 @@ router.get('/', async (req, res) => {
   res.send(rentals);
 });
 
-router.post('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+  const rental = await Rental.findById(req.params.id);
+
+  if (!rental)
+    return res.status(404).send('The rental with the given ID was not found.');
+
+  res.send(rental);
+});
+
+router.post('/', [auth, admin], async (req, res) => {
   const { error } = validateRental(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -43,13 +55,12 @@ router.post('/', async (req, res) => {
   res.send(rental);
 });
 
-router.get('/:id', async (req, res) => {
-  const rental = await Rental.findById(req.params.id);
+router.put('/', (req, res) => {
+  res.send('Under developing');
+});
 
-  if (!rental)
-    return res.status(404).send('The rental with the given ID was not found.');
-
-  res.send(rental);
+router.delete('/', (req, res) => {
+  res.send('Under developing');
 });
 
 module.exports = router;
