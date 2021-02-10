@@ -3,7 +3,6 @@ const admin = require('../middleware/admin');
 const express = require('express');
 const router = express.Router();
 const { Customer, validateCustomer } = require('../models/customer');
-const admin = require('../middleware/admin');
 
 router.use(express.json());
 

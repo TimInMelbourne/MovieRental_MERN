@@ -1,7 +1,6 @@
 const auth = require('../middleware/auth');
 const { Rental, validateRental } = require('../models/rental');
 const { Movie } = require('../models/movie');
-const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const { Customer } = require('../models/customer');
 const mongoose = require('mongoose');
